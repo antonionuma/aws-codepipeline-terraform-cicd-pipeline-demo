@@ -2,7 +2,8 @@ resource "aws_s3_bucket" "remote_state" {
   #checkov:skip=CKV_AWS_144: "Cross Region Unneccessary"
   #checkov:skip=CKV_AWS_145: "Bucket Encryption IS enabled separately"
 
-  bucket        = "${local.prefix}-${data.aws_caller_identity.current_account.id}"
+  #bucket        = "${local.prefix}-${data.aws_caller_identity.current_account.id}"
+  bucket        = "${local.prefix}"
   force_destroy = true
 
   lifecycle {

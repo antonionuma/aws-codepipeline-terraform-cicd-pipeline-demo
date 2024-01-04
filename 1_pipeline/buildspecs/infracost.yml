@@ -15,7 +15,7 @@ phases:
   build:
     commands:
       - cd "$CODEBUILD_SRC_DIR"
-      - 'export INFRACOST_API_KEY=$(aws --region=us-west-2 ssm get-parameter --name "${INFRACOST_API_KEY_SSM_PARAM_NAME}" --with-decryption --output text --query Parameter.Value)'
+      - 'export INFRACOST_API_KEY=$(aws --region=us-east-1 ssm get-parameter --name "${INFRACOST_API_KEY_SSM_PARAM_NAME}" --with-decryption --output text --query Parameter.Value)'
       - infracost breakdown --path .
   post_build:
     commands:
