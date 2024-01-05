@@ -23,7 +23,8 @@ resource "aws_s3_bucket_public_access_block" "s3Public_artifacts" {
 
 resource "aws_s3_bucket_logging" "example" {
   bucket        = aws_s3_bucket.artifacts.id
-  target_bucket = var.logging_bucket
+  #target_bucket = var.logging_bucket
+  target_bucket = "${var.project_name}-s3"
   target_prefix = "s3/${aws_s3_bucket.artifacts.id}/"
 }
 
@@ -54,7 +55,8 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
 
 resource "aws_s3_bucket_logging" "artifacts" {
   bucket        = aws_s3_bucket.artifacts.id
-  target_bucket = var.logging_bucket
+  target_bucket = "${var.project_name}-s3"
+  #target_bucket = var.logging_bucket
   target_prefix = "s3/${aws_s3_bucket.artifacts.id}/"
 }
 

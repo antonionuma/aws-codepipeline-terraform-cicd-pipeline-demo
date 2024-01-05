@@ -31,10 +31,10 @@ resource "aws_s3_bucket_versioning" "remote_state_versioning" {
 }
 
 
-resource "aws_s3_bucket_acl" "remote_state_acl" {
-  bucket = aws_s3_bucket.remote_state.id
-  acl    = "private"
-}
+#resource "aws_s3_bucket_acl" "remote_state_acl" {
+#  bucket = aws_s3_bucket.remote_state.id
+#  acl    = "private"
+#}
 
 
 resource "aws_s3_bucket_public_access_block" "s3Public_remote_state" {
