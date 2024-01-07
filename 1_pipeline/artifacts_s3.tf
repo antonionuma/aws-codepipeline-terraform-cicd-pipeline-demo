@@ -14,7 +14,8 @@ resource "aws_s3_bucket" "artifacts" {
 resource "aws_s3_bucket_public_access_block" "s3Public_artifacts" {
   bucket                  = aws_s3_bucket.artifacts.id
   block_public_acls       = true
-  block_public_policy     = true
+  #block_public_policy     = true
+  block_public_policy     = false
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
@@ -63,6 +64,46 @@ resource "aws_s3_bucket_logging" "artifacts" {
 resource "aws_s3_bucket_policy" "artifacts" {
   bucket = aws_s3_bucket.artifacts.id
 
+# Policy para acceso Github al bucket the artifacts
+  policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": [
+            "${aws_s3_bucket.artifacts.arn}",
+            "${aws_s3_bucket.artifacts.arn}/*"
+          ],
+      "Condition": {
+        "StringLike": {
+          "aws:Referer": "https://github.com/antonionuma"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:PutObject",
+      "Resource": [
+            "${aws_s3_bucket.artifacts.arn}",
+            "${aws_s3_bucket.artifacts.arn}/*"
+          ],
+      "Condition": {
+        "StringLike": {
+          "aws:Referer": "https://github.com/antonionuma"
+        }
+      }
+    }
+  ]
+}
+
+POLICY
+
+
+/*
   policy = <<POLICY
 {
     "Version": "2008-10-17",
@@ -99,6 +140,7 @@ resource "aws_s3_bucket_policy" "artifacts" {
     ]
 }
 POLICY
+*/
 
 }
 
