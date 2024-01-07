@@ -77,10 +77,18 @@ resource "aws_iam_role_policy" "codepipeline" {
 
 # CodePipeline
 
+
+resource "aws_codestarconnections_connection" "Github_conection" {
+  name          = "Github_conection"
+  provider_type = "GitHub"
+}
+
+
 resource "aws_codepipeline" "demo" {
   name     = "${local.prefix}-demo"
   role_arn = aws_iam_role.codepipeline.arn
   tags     = local.common_tags
+  #provider = aws
 
   artifact_store {
     location = aws_s3_bucket.artifacts.id
@@ -88,23 +96,38 @@ resource "aws_codepipeline" "demo" {
   }
 
   stage {
-    name = "Clone"
+    name = "Source"
 
     action {
       name             = "Source"
       category         = "Source"
       owner            = "AWS"
-      provider         = "CodeCommit"
+      #provider         = "CodeCommit"
+      #provider         = "GitHub"
+      provider         = "CodeStarSourceConnection"
       version          = "1"
       output_artifacts = ["CodeWorkspace"]
 
+      #configuration = {
+      #  RepositoryName       = var.repository_name
+      #  BranchName           = var.listen_branch_name
+      #  PollForSourceChanges = true
+      #}
+
+      #region = local.aws_region
+
+
       configuration = {
-        RepositoryName       = var.repository_name
-        BranchName           = var.listen_branch_name
-        PollForSourceChanges = true
+      ConnectionArn    = aws_codestarconnections_connection.Github_conection.arn
+      FullRepositoryId = "antonionuma/aws-codepipeline-terraform-cicd-pipeline-demo/2_tf-s3-demo-project"
+      BranchName       = "main"
       }
+
+
     }
   }
+
+
 
   stage {
     name = "Terraform-Project-Testing"
@@ -232,3 +255,4 @@ resource "aws_codepipeline" "demo" {
     }
   }
 }
+

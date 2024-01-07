@@ -47,10 +47,10 @@ resource "aws_s3_bucket_versioning" "versioning" {
 }
 
 
-resource "aws_s3_bucket_acl" "bucket_acl" {
-  bucket = aws_s3_bucket.artifacts.id
-  acl    = "private"
-}
+#resource "aws_s3_bucket_acl" "bucket_acl" {
+#  bucket = aws_s3_bucket.artifacts.id
+#  acl    = "private"
+#}
 
 
 resource "aws_s3_bucket_logging" "artifacts" {
