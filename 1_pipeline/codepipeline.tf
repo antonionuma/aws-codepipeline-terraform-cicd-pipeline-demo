@@ -69,7 +69,29 @@ resource "aws_iam_role_policy" "codepipeline" {
             aws_codebuild_project.infracost.arn,
             aws_codebuild_project.tf_apply.arn
           ]
-        }
+        },
+        
+        {
+                "Sid": "ConnectionsFullAccess",
+                "Effect": "Allow",
+                "Action": [
+                    "codestar-connections:CreateConnection",
+                    "codestar-connections:DeleteConnection",
+                    "codestar-connections:UseConnection",
+                    "codestar-connections:GetConnection",
+                    "codestar-connections:ListConnections",
+                    "codestar-connections:ListInstallationTargets",
+                    "codestar-connections:GetInstallationUrl",
+                    "codestar-connections:StartOAuthHandshake",
+                    "codestar-connections:UpdateConnectionInstallation",
+                    "codestar-connections:GetIndividualAccessToken",
+                    "codestar-connections:TagResource",
+                    "codestar-connections:ListTagsForResource",
+                    "codestar-connections:UntagResource"
+                ],
+                "Resource": "*"
+            }
+
       ]
     }
   )
