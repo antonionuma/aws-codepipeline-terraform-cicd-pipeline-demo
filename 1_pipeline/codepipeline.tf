@@ -125,7 +125,6 @@ resource "aws_codepipeline" "demo" {
       category         = "Source"
       owner            = "AWS"
       #provider         = "CodeCommit"
-      #provider         = "GitHub"
       provider         = "CodeStarSourceConnection"
       version          = "1"
       output_artifacts = ["CodeWorkspace"]
@@ -141,7 +140,7 @@ resource "aws_codepipeline" "demo" {
 
       configuration = {
       ConnectionArn    = aws_codestarconnections_connection.Github_conection.arn
-      FullRepositoryId = "antonionuma/aws-codepipeline-terraform-cicd-pipeline-demo/2_tf-s3-demo-project"
+      FullRepositoryId = "antonionuma/2_tf-s3-demo-project"
       BranchName       = "main"
       }
 
