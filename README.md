@@ -2,7 +2,7 @@
 
 This is a demo Terraform repository to set up AWS CodePipeline to test Terraform projects using tflint, Checkov, OPA, Terrascan, and Terratest.
 
-Thanks to @andreivmaksimov(https://github.com/andreivmaksimov) for the idea! Additional information can be found in the [How to use CodePipeline CICD pipeline to test Terraform](https://github.com/antonionuma/aws-codepipeline-terraform-cicd-pipeline-demo/) article.
+Thanks to @andreivmaksimov (https://github.com/andreivmaksimov) for the idea! Additional information can be found in the [How to use CodePipeline CICD pipeline to test Terraform](https://github.com/antonionuma/aws-codepipeline-terraform-cicd-pipeline-demo/) article.
 
 
 # Take note of some Changes: 
