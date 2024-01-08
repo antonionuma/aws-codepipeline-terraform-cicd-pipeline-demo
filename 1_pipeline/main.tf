@@ -7,6 +7,7 @@ terraform {
     encrypt = "true"
     shared_credentials_file = "~/.aws/credentials"
     profile = "cloud-env"
+    dynamodb_table = "hands-on-cloud-terraform-remote-state-dynamodb"
   }
 }
 
